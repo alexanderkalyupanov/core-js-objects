@@ -19,6 +19,7 @@
  */
 function shallowCopy(/* obj */) {
   throw new Error('Not implemented');
+  //  return Object.assign({}, obj);
 }
 
 /**
@@ -32,10 +33,13 @@ function shallowCopy(/* obj */) {
  *    mergeObjects([{a: 1, b: 2}, {b: 3, c: 5}]) => {a: 1, b: 5, c: 5}
  *    mergeObjects([]) => {}
  */
-function mergeObjects(/* objects */) {
-  throw new Error('Not implemented');
+function mergeObjects(objects) {
+  const copy = objects.flatMap(Object.entries).reduce((acc, [key, value]) => {
+    acc[key] = (acc[key] || 0) + value;
+    return acc;
+  }, {});
+  return copy;
 }
-
 /**
  * Removes a properties from an object.
  *
